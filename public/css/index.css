@@ -1,0 +1,387 @@
+/* === Styles généraux === */
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background-color: #101820;
+  background-image: url("../../includes/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #e5f9ff;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(16, 24, 32, 0.4);
+  z-index: -1;
+  pointer-events: none;
+}
+h1,
+h2,
+h3,
+a {
+  font-family: "Orbitron", sans-serif;
+}
+.margin_body_sauf_headerfooter {
+  margin: 15px;
+}
+
+.center {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  height: 100vh;
+  text-align: center;
+}
+
+/* === Titres === */
+h2,
+.Administrationh3 {
+  color: #e5f9ff;
+  text-shadow: 0 0 10px #00f0ff;
+  margin: 0.5rem 0;
+}
+
+h2 {
+  font-size: 3rem;
+  padding-bottom: 25px;
+}
+
+.Administrationh3 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #00eeffad;
+}
+
+/* === Paragraphes === */
+p,
+.infos {
+  font-size: 1.5rem;
+  color: #e5f9ff;
+  text-shadow: 0 0 10px #00f0ff;
+  margin: 0.5rem 0;
+}
+
+.infos {
+  color: #1e90ff;
+  text-shadow: 0 0 4px #5affff;
+  font-weight: normal;
+  margin-right: 20px;
+}
+
+/* === Header === */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 2px solid #1f2f45;
+  box-shadow: 0 0 20px #00f0ff;
+  background-color: rgba(31, 47, 69, 0.9);
+  border-radius: 10px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  text-shadow: 0 0 12px #00f0ff;
+  margin: 0.5rem 0;
+}
+
+header p {
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px #00f0ff;
+  margin: 0.5rem 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+
+header nav a {
+  color: #00c0d6;
+  text-decoration: none;
+  font-size: 1.5rem;
+  text-shadow: 0 0 8px #5affff;
+  margin-right: 20px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #00f0ff;
+}
+
+/* === Footer === */
+footer {
+  padding: 1.5rem;
+  background-color: rgba(31, 47, 69, 0.9);
+  box-shadow: 0 0 20px #00f0ff;
+  border-radius: 10px;
+  margin-top: 50px;
+  text-align: center;
+  color: #e5f9ff;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
+
+footer a {
+  color: #00c0d6;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 8px #5affff;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #00f0ff;
+}
+
+/* === Bouton retour index (fusion des 2 classes similaires) === */
+.centrer_retour_index {
+  color: #03dede;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 2px solid #00c0d6;
+  border-radius: 8px;
+  background-color: rgba(31, 47, 69, 0.9);
+  transition: all 0.3s ease;
+  font-weight: bold;
+  display: flex;
+  max-width: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 60px auto;
+}
+
+.centrer_retour_index:hover {
+  color: #1e1e1e;
+  background-color: #00c0d6;
+  border-color: #1e1e1e;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* === Post === */
+.post-preview,
+.post-list {
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: rgba(31, 47, 69, 0.637);
+  box-shadow: 0 0 10px #00f0ff;
+  border-radius: 10px;
+}
+
+.post-preview {
+  border-bottom: 1px solid #ccccccc2;
+  box-shadow: 0 0 20px #00f0ff;
+}
+
+.post-preview:hover,
+.post-list:hover {
+  color: #1e1e1e;
+  background-color: rgba(31, 47, 69, 0.9);
+  border-color: #1e1e1e;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.877);
+}
+
+.post-preview h3 a {
+  font-size: larger;
+  text-decoration: none;
+  color: #1e90ff;
+  transition: color 0.3s;
+}
+
+.post-preview h3 a:hover {
+  color: #60c5ff;
+}
+
+.post-preview a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #0077cc;
+}
+
+.post-preview a:hover {
+  color: #005299;
+}
+
+/* === Formulaires et Entrées === */
+input[type="text"],
+input[type="password"],
+input,
+textarea,
+button,
+select {
+  padding: 10px;
+  border: 2px solid #00c0d6;
+  border-radius: 8px;
+  background-color: rgba(31, 47, 69, 0.9);
+  color: #e5f9ff;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+input:hover,
+button:hover {
+  border-color: #1e1e1e;
+  background-color: #00c0d6;
+  color: #1e1e1e;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.877);
+}
+
+label {
+  font-size: 1.5rem;
+  color: #e5f9ff;
+  text-shadow: 0 0 10px #00f0ff;
+}
+.editing {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  max-width: 90%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.editing input[type="text"],
+.editing button {
+  width: 80%;
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #00c0d6;
+  background-color: rgba(31, 47, 69, 0.9);
+  color: #e5f9ff;
+}
+
+.editing button {
+  background-color: #00c0d6;
+  color: #1e1e1e;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editing button:hover {
+  background-color: #00f0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4);
+}
+
+.editing textarea {
+  flex: 2;
+  resize: vertical;
+  min-height: 100%;
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #00c0d6;
+  background-color: rgba(31, 47, 69, 0.9);
+  color: #e5f9ff;
+}
+
+/* === Divers === */
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.request-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: rgba(31, 47, 69, 0.637);
+  box-shadow: 0 0 10px #00f0ff;
+  border-radius: 10px;
+}
+
+/* === Responsive Design === */
+
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  header nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  header p {
+    font-size: 1.2rem;
+  }
+
+  .post-preview,
+  .post-list,
+  .request-container {
+    padding: 0.8em;
+  }
+
+  .centrer_retour_index,
+  #centrer_retour_index {
+    max-width: 80%;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input,
+  textarea,
+  button,
+  select {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  .Administrationh3 {
+    font-size: 2rem;
+  }
+
+  nav a {
+    font-size: 1.2rem;
+    margin: 10px;
+  }
+}
