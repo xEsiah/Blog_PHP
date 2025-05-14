@@ -1,7 +1,6 @@
 <?php
 session_start();
 include __DIR__ . '/../../config/config.php';
-include __DIR__ . '/../../includes/header.php';
 
 // Vérifie si l'utilisateur est un auteur
 function isAuthor(PDO $pdo, int $userId): bool
@@ -22,33 +21,25 @@ if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
-// Récupération du post
-$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
-$stmt->execute([$id]);
-$post = $stmt->fetch();
-
-if (!$post) {
-    exit('<h2>Post introuvable.</h2>');
-}
-
 // Mise à jour après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
     $content = trim($_POST['content'] ?? '');
 
     if ($title && $content) {
-        // Mise à jour du post
         $stmt = $pdo->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ?");
         $stmt->execute([$title, $content, $id]);
 
-        // Redirection après mise à jour
         header('Location: index.php');
         exit;
     } else {
-        // Message d'erreur si les champs sont vides
-        echo '<p style="color:red;">Tous les champs sont obligatoires.</p>';
+        $errorMessage = '<p style="color:red;">Tous les champs sont obligatoires.</p>';
     }
 }
+
+// Puis ensuite tu inclues le HTML :
+include __DIR__ . '/../../includes/header.php';
+
 ?>
 
 <h2>Modifier l'article</h2>
