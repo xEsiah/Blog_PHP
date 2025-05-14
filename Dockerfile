@@ -12,14 +12,18 @@ RUN a2enmod rewrite
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
-# Copier les fichiers du projet
-COPY . /var/www/html/
-
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Installer les dépendances PHP
-WORKDIR /var/www/html/
-RUN composer install --no-interaction --prefer-dist
+# Copier uniquement composer.json et composer.lock d'abord pour utiliser le cache Docker
+WORKDIR /var/www/html
+COPY composer.json composer.lock* ./
+RUN composer install --no-interaction --prefer-dist --no-scripts
+
+# Ensuite, copier le reste du projet
+COPY . .
+
+# Réinstaller si des fichiers ont changé après copie
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 EXPOSE 80
