@@ -1,53 +1,45 @@
 <?php
-include __DIR__ . '/../../includes/header.php';
-include __DIR__ . '/../../config/config.php';
+session_start();
+include __DIR__ . '/../../../config/config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['request_id'])) {
-    $requestId = (int) $_POST['request_id'];
-    $action = $_POST['action'];
-
-    try {
-        if ($action === '✔️ Accepter') {
-            $stmt = $pdo->prepare("SELECT first_name, last_name, username, password FROM access_requests WHERE id = ?");
-            $stmt->execute([$requestId]);
-            $request = $stmt->fetch();
-
-            if ($request) {
-                $insert = $pdo->prepare("INSERT INTO authors (first_name, last_name, username, password) VALUES (?, ?, ?, ?)");
-                $insert->execute([
-                    $request['first_name'],
-                    $request['last_name'],
-                    $request['username'],
-                    $request['password']
-                ]);
-
-                $delete = $pdo->prepare("DELETE FROM access_requests WHERE id = ?");
-                $delete->execute([$requestId]);
-
-                echo "<p class='success-message'>Demande acceptée, auteur ajouté.</p>";
-                exit;
-            } else {
-                echo "<p class='error-message'>Demande introuvable.</p>";
-                exit;
-            }
-        } elseif ($action === '🛑 Rejeter') {
-            $delete = $pdo->prepare("DELETE FROM access_requests WHERE id = ?");
-            $delete->execute([$requestId]);
-
-            echo "<p class='error-message'>Demande rejetée.</p>";
-            exit;
-        }
-    } catch (Exception $e) {
-        echo "<p class='error-message'>Une erreur est survenue : " . $e->getMessage() . "</p>";
-        exit;
-    }
-} else {
-    echo "<p class='error-message'>Requête invalide.</p>";
-    exit;
+// Vérifie si utilisateur connecté
+if (empty($_SESSION['user']['id'])) {
+    exit('Accès refusé.');
 }
-?>
 
-<a class="centrer_retour_index" href="index.php" aria-label="Retour vers la liste des articles">← Retour à
-    l'Administration</a>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $requestId = (int) ($_POST['request_id'] ?? 0);
+    $action = $_POST['action'] ?? '';
 
-<?php include __DIR__ . '/../../includes/footer.php'; ?>
+    if (!$requestId || !in_array($action, ['✔️ Accepter', '🛑 Rejeter'])) {
+        exit('Requête invalide.');
+    }
+
+    // Récupère la demande
+    $stmt = $pdo->prepare("SELECT * FROM access_requests WHERE id = ?");
+    $stmt->execute([$requestId]);
+    $request = $stmt->fetch();
+
+    if (!$request) {
+        exit('Demande non trouvée.');
+    }
+
+    if ($action === '✔️ Accepter') {
+        // Ajoute l'utilisateur dans authors
+        $stmt = $pdo->prepare("INSERT INTO authors (username, first_name, last_name) VALUES (?, ?, ?)");
+        $stmt->execute([
+            $request['username'],
+            $request['first_name'],
+            $request['last_name']
+        ]);
+    }
+
+    // Supprime toujours la demande après traitement
+    $stmt = $pdo->prepare("DELETE FROM access_requests WHERE id = ?");
+    $stmt->execute([$requestId]);
+
+    header('Location: index.php');
+    exit;
+} else {
+    echo "Méthode non autorisée.";
+}
