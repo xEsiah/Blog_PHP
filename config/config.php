@@ -1,22 +1,30 @@
 <?php
-// Inclure le fichier autoload de Composer
-require_once '../vendor/autoload.php'; // Assure-toi que le chemin est correct
+require __DIR__ . '/../vendor/autoload.php';
 
-// Charger les variables d'environnement depuis le fichier .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+// On calcule le chemin absolu vers la racine du projet
+$projectRoot = realpath(__DIR__ . '/..');
+
+if ($projectRoot === false) {
+    throw new RuntimeException("Impossible de déterminer le chemin du projet.");
+}
+
+// On charge les variables d'environnement
+$dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
+// safeLoad() nève jamais lever une exception si .env est manquant ou non lisible
+$dotenv->safeLoad();
 
 // Récupérer les valeurs des variables d'environnement
-$host = getenv('DB_HOST');
-$dbname = getenv('DB_NAME');
-$username = getenv('DB_USER');
-$password = getenv('DB_PASSWORD'); // Peut être vide, selon ton environnement
+$host = $_ENV['DB_HOST'];
+$db = $_ENV['DB_DATABASE'];
+$user = $_ENV['DB_USERNAME'];
+$pass = $_ENV['DB_PASSWORD'];
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 try {
-    // Créer une connexion à la base de données avec PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    // Définir les erreurs PDO comme exceptions
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO($dsn, $user, $pass);
+    // echo "Connexion réussie à la base de données.";
 } catch (PDOException $e) {
-    die("Connexion échouée : " . $e->getMessage());
+    echo "Connexion échouée : " . $e->getMessage();
 }
