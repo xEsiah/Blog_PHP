@@ -1,4 +1,5 @@
-<?php include '../includes/header.php'; ?>
+<?php
+include '../includes/header.php'; ?>
 <style>
     body {
         background-image: url("/images/background2.jpg");

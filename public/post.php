@@ -1,6 +1,6 @@
 <?php
-include '../includes/header.php';
-include '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../includes/header.php';
 
 if (isset($_GET['id'])) {
     $postId = (int) $_GET['id'];
@@ -83,4 +83,4 @@ if (isset($_GET['id'])) {
     echo "<p>ID de post invalide.</p>";
 }
 
-include '../includes/footer.php';
+require_once __DIR__ . '/../includes/footer.php';
