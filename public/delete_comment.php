@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("DELETE FROM comments WHERE id = ?");
     $stmt->execute([$commentId]);
 
-    header("Location: post.php?id=" . $postId);
+    header(BASE_URL / "post.php?id=" . $postId);
     exit;
 } else {
     echo "Méthode non autorisée.";
