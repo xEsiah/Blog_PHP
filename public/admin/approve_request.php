@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . '/../../../config/config.php';
+include __DIR__ . '/../../config/config.php'; // ← Corrigé ici
 
 // Vérifie si utilisateur connecté
 if (empty($_SESSION['user']['id'])) {
