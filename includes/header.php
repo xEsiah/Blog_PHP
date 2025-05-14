@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Esiah's Corner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/includes/icon.ico">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/images/icon.ico">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css">
 

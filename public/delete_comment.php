@@ -1,30 +1,32 @@
 <?php
+ob_start(); // Pour éviter les erreurs de header déjà envoyés
 session_start();
 include '../config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $commentId = (int) ($_POST['comment_id'] ?? 0);
 
-    // Vérifie que l'utilisateur est connecté
-    if (!isset($_SESSION['user'])) {
-        header('Location: login.php'); // Redirection si non connecté
-        exit;
-    }
-
-    // Récupérer le post_id lié au commentaire à supprimer
+    // Récupérer le post_id lié au commentaire
     $stmt = $pdo->prepare("SELECT post_id FROM comments WHERE id = ?");
     $stmt->execute([$commentId]);
     $comment = $stmt->fetch();
 
     if (!$comment) {
-        die("Commentaire introuvable.");
+        die("❌ Commentaire introuvable.");
     }
 
     $postId = (int) $comment['post_id'];
-    $userId = $_SESSION['user']['id'];
-    $userRole = $_SESSION['user']['role'];
 
-    // Récupère l'auteur du post lié à ce commentaire
+    // Vérifie que l'utilisateur est connecté
+    if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
+        header("Location: post.php?id=" . $postId);
+        exit;
+    }
+
+    $userId = $_SESSION['user']['id'];
+    $userRole = $_SESSION['user']['role'] ?? 'user'; // Défaut à "user" si non défini
+
+    // Vérifie si l'utilisateur est l'auteur du post
     $stmt = $pdo->prepare("
         SELECT posts.author_id 
         FROM posts 
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postData = $stmt->fetch();
 
     if (!$postData) {
-        die("Commentaire ou post introuvable.");
+        die("❌ Commentaire ou post introuvable.");
     }
 
     // Seul l'auteur du post ou un admin peut supprimer
