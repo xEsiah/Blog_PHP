@@ -10,7 +10,6 @@ if ($projectRoot === false) {
 
 // On charge les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
-// safeLoad() nève jamais lever une exception si .env est manquant ou non lisible
 $dotenv->safeLoad();
 
 // Récupérer les valeurs des variables d'environnement
@@ -18,9 +17,9 @@ $host = $_ENV['DB_HOST'];
 $db = $_ENV['DB_DATABASE'];
 $user = $_ENV['DB_USERNAME'];
 $pass = $_ENV['DB_PASSWORD'];
-$charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+// Nouveau DSN pour PostgreSQL
+$dsn = "pgsql:host=$host;port=5432;dbname=$db";
 
 try {
     $pdo = new PDO($dsn, $user, $pass);
