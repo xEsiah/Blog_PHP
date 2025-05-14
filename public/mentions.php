@@ -1,7 +1,7 @@
 <?php include '../includes/header.php'; ?>
 <style>
     body {
-        background-image: url("../includes/background2.jpg");
+        background-image: url("/images/background2.jpg");
         text-shadow: none;
     }
 
