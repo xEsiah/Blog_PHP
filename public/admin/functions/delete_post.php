@@ -22,5 +22,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id'])) {
 }
 
 // Redirection finale après suppression
-header('Location: /Projet_PHP_BLOG/admin/index.php');
+header('Location: /admin/index.php');
 exit;
