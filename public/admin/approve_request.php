@@ -25,14 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($action === '✔️ Accepter') {
-        // Ajoute l'utilisateur dans authors
-        $stmt = $pdo->prepare("INSERT INTO authors (username, first_name, last_name) VALUES (?, ?, ?)");
+        // Ajoute l'utilisateur dans authors avec un mot de passe par défaut ou celui de la demande
+        $password = password_hash('motdepassepardefaut', PASSWORD_BCRYPT); // Remplace par le mot de passe réel si nécessaire
+
+        $stmt = $pdo->prepare("INSERT INTO authors (username, first_name, last_name, password) VALUES (?, ?, ?, ?)");
         $stmt->execute([
             $request['username'],
             $request['first_name'],
-            $request['last_name']
+            $request['last_name'],
+            $password
         ]);
     }
+
 
     // Supprime toujours la demande après traitement
     $stmt = $pdo->prepare("DELETE FROM access_requests WHERE id = ?");
