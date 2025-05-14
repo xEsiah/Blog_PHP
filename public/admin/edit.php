@@ -65,4 +65,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <a class="centrer_retour_index" href="index.php">← Retour à l'administration</a>
 
-<?php require '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>

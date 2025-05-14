@@ -4,17 +4,27 @@ include '../config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $commentId = (int) ($_POST['comment_id'] ?? 0);
-    $postId = (int) ($_POST['post_id'] ?? 0);
 
     // Vérifie que l'utilisateur est connecté
     if (!isset($_SESSION['user'])) {
-        BASE_URL;
+        header('Location: login.php'); // Redirection si non connecté
+        exit;
     }
 
+    // Récupérer le post_id lié au commentaire à supprimer
+    $stmt = $pdo->prepare("SELECT post_id FROM comments WHERE id = ?");
+    $stmt->execute([$commentId]);
+    $comment = $stmt->fetch();
+
+    if (!$comment) {
+        die("Commentaire introuvable.");
+    }
+
+    $postId = (int) $comment['post_id'];
     $userId = $_SESSION['user']['id'];
     $userRole = $_SESSION['user']['role'];
 
-    // Récupère l'auteur du post
+    // Récupère l'auteur du post lié à ce commentaire
     $stmt = $pdo->prepare("
         SELECT posts.author_id 
         FROM posts 
@@ -32,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Seul l'auteur du post ou un admin peut supprimer
     if ($userRole !== 'admin' && $userId !== (int) $postData['author_id']) {
         header("Location: post.php?id=" . $postId);
+        exit;
     }
 
     // Suppression autorisée
