@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 $errors = [];
 
@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
 
-            // Redirection selon un éventuel champ 'is_Administration'
+            // Redirection selon le rôle
             if (!empty($user['is_Administration'])) {
-                header("Location: ../Administration/dashboard.php");
+                header("Location: ../admin/index.php");
             } else {
-                header("Location: ../public/index.php");
+                header("Location: index.php");
             }
             exit;
         } else {
@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include '../includes/header.php'; ?>
+<?php require_once __DIR__ . '/../includes/header.php'; ?>
+
 <h2>Connexion</h2>
 
 <?php foreach ($errors as $error): ?>
@@ -48,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button type="submit">Se connecter</button>
 </form>
+
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
