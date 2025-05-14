@@ -3,5 +3,5 @@ session_start();
 session_unset();
 session_destroy();
 
-header(BASE_URL);
+header('Location: <?= BASE_URL ?>');
 exit;

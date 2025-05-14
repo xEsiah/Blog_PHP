@@ -31,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Seul l'auteur du post ou un admin peut supprimer
     if ($userRole !== 'admin' && $userId !== (int) $postData['author_id']) {
-        die("Vous n'avez pas les droits pour supprimer ce commentaire.");
+        header("Location: post.php?id=" . $postId);
     }
 
     // Suppression autorisée
     $stmt = $pdo->prepare("DELETE FROM comments WHERE id = ?");
     $stmt->execute([$commentId]);
 
-    header(BASE_URL / "post.php?id=" . $postId);
+    header("Location: post.php?id=" . $postId);
     exit;
 } else {
     echo "Méthode non autorisée.";

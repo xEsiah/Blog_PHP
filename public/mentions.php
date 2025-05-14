@@ -39,7 +39,7 @@ require_once __DIR__ . '/../includes/header.php'; ?>
     </p>
     <p>Fond d'écran de la page Mentions par <a href="https://x.com/wndr0001">wndr0001</a></p>
     <div class="gromp">
-        <img src="../includes/xd.png" alt="Gromp" style="width: 50%; height: auto; border-radius: 10px;">
+        <img src="images/xd.png" alt="Gromp" style="width: 50%; height: auto; border-radius: 10px;">
     </div>
 </div>
 <a class="centrer_retour_index" href="<?= BASE_URL ?>/index.php" aria-label="Retour vers la liste des articles">←
