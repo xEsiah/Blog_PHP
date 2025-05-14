@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: mon-blog-php
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DB_HOST
+        value: ton_hote_bdd
+      # ajoute d'autres variables si nécessaire
