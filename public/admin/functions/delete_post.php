@@ -1,7 +1,6 @@
 <?php
 session_start();
 include __DIR__ . '/../../../config/config.php';
-include __DIR__ . '/../../../includes/header.php';
 
 function isAuthor(PDO $pdo, int $userId): bool
 {
@@ -22,5 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['id'])) {
     $stmt->execute([$_POST['id']]);
 }
 
+// Redirection finale après suppression
 header('Location: /Projet_PHP_BLOG/admin/index.php');
 exit;

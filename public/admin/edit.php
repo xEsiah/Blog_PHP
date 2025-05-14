@@ -21,6 +21,15 @@ if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
+// Récupération du post
+$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
+$stmt->execute([$id]);
+$post = $stmt->fetch();
+
+if (!$post) {
+    exit('<h2>Post introuvable.</h2>');
+}
+
 // Mise à jour après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -37,14 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Puis ensuite tu inclues le HTML :
 include __DIR__ . '/../../includes/header.php';
-
 ?>
 
 <h2>Modifier l'article</h2>
 <div>
-    <!-- Formulaire de modification -->
+    <?= $errorMessage ?? '' ?>
     <form class="editing" method="POST">
         <div class="left-col">
             <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>" required>
