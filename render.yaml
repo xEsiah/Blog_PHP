@@ -1,13 +1,19 @@
 services:
   - type: web
-    name: mon-blog-php
+    name: projet-php-blog
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    autoDeploy: true
     healthCheckPath: /
     envVars:
       - key: APP_ENV
         value: production
       - key: DB_HOST
-        value: ton_hote_bdd
-      # ajoute d'autres variables si nécessaire
+        value: your-db-host
+      - key: DB_USER
+        value: your-db-user
+      - key: DB_PASSWORD
+        value: your-db-password
+      - key: DB_NAME
+        value: your-db-name
