@@ -4,6 +4,7 @@ body {
   background-color: #101820;
   background-image: url("/images/background.jpg");
   background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #e5f9ff;
