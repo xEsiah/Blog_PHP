@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/includes/icon.ico">
 
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
 </head>
@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <p>Le forum de l'élitisme</p>
         </div>
         <nav>
-            <a href="/public/index.php">Accueil</a>
+            <a href="index.php">Accueil</a>
             <?php if (isset($_SESSION['user'])): ?>
                 <!-- L'utilisateur est connecté, on affiche le lien d'Administration -->
                 <a href="/admin/article_creation.php">Créer un post</a>

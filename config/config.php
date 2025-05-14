@@ -27,3 +27,4 @@ try {
 } catch (PDOException $e) {
     echo "Connexion échouée : " . $e->getMessage();
 }
+define('BASE_URL', 'https://projet-php-blog.onrender.com');
