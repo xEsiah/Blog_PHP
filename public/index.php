@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ . '/config/config.php';
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../includes/header.php';
 
-// Récupérer les 5 derniers posts
 try {
     $query = "SELECT id, title, content, created_at FROM posts ORDER BY created_at DESC LIMIT 5";
     $stmt = $pdo->query($query);
