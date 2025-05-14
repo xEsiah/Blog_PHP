@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../includes/header.php';
-require '../config/config.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../includes/header.php';
 
 // Vérifie si l'utilisateur est un auteur
 function isAuthor(PDO $pdo, int $userId): bool
