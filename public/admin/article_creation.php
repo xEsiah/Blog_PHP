@@ -1,7 +1,7 @@
 <?php
 session_start();
-include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../includes/header.php';
 
 if (!isset($_SESSION['user'])) {
     exit('<p>Accès réservé aux auteurs connectés.</p>');

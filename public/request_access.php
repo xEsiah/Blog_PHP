@@ -1,5 +1,6 @@
 <?php
-include '../includes/header.php';
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['first_name'], $_POST['last_name'], $_POST['username'], $_POST['password'], $_POST['motivation'])) {

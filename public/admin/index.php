@@ -1,7 +1,7 @@
 <?php
 session_start();
-include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../includes/header.php';
 
 // Fonction vérifiant si l'auteur est connecté
 function isAdministration(PDO $pdo, int $userId): bool

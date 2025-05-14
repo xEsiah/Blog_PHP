@@ -1,5 +1,6 @@
 <?php
-include '../includes/header.php'; ?>
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../includes/header.php'; ?>
 <style>
     body {
         background-image: url("/images/background2.jpg");

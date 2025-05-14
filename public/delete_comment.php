@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifie que l'utilisateur est connecté
     if (!isset($_SESSION['user'])) {
-        die("Accès non autorisé.");
+        BASE_URL;
     }
 
     $userId = $_SESSION['user']['id'];
