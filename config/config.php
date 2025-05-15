@@ -7,13 +7,17 @@ if ($projectRoot === false) {
     throw new RuntimeException("Impossible de déterminer le chemin du projet.");
 }
 
-$dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
-$dotenv->load(); // Utiliser load() pour lever les erreurs
+$envFile = $projectRoot . '/.env';
+if (file_exists($envFile)) {
+    $dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
+    $dotenv->load();
+}
 
-$host = $_ENV['DB_HOST'];
-$db = $_ENV['DB_DATABASE'];
-$user = $_ENV['DB_USERNAME'];
-$pass = $_ENV['DB_PASSWORD'];
+// Maintenant, on récupère les variables d'environnement, que ce soit du .env local ou de Render
+$host = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
+$db = $_ENV['DB_DATABASE'] ?? getenv('DB_DATABASE');
+$user = $_ENV['DB_USERNAME'] ?? getenv('DB_USERNAME');
+$pass = $_ENV['DB_PASSWORD'] ?? getenv('DB_PASSWORD');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
 
@@ -24,7 +28,6 @@ try {
     die("Connexion échouée : " . $e->getMessage());
 }
 
-// Détection automatique de l'environnement pour BASE_URL
 $hostName = $_SERVER['HTTP_HOST'] ?? 'cli';
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
