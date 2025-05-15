@@ -1,30 +1,36 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-// On calcule le chemin absolu vers la racine du projet
 $projectRoot = realpath(__DIR__ . '/..');
 
 if ($projectRoot === false) {
     throw new RuntimeException("Impossible de déterminer le chemin du projet.");
 }
 
-// On charge les variables d'environnement
 $dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
-$dotenv->safeLoad();
+$dotenv->load(); // Utiliser load() pour lever les erreurs
 
-// Récupérer les valeurs des variables d'environnement
 $host = $_ENV['DB_HOST'];
 $db = $_ENV['DB_DATABASE'];
 $user = $_ENV['DB_USERNAME'];
 $pass = $_ENV['DB_PASSWORD'];
 
-// Nouveau DSN pour PostgreSQL
-$dsn = "pgsql:host=$host;port=5432;dbname=$db";
+$dsn = "mysql:host=$host;dbname=$db;charset=utf8";
 
 try {
     $pdo = new PDO($dsn, $user, $pass);
-    // echo "Connexion réussie à la base de données.";
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo "Connexion échouée : " . $e->getMessage();
+    die("Connexion échouée : " . $e->getMessage());
 }
-define('BASE_URL', 'https://projet-php-blog.onrender.com');
+
+// Détection automatique de l'environnement pour BASE_URL
+$hostName = $_SERVER['HTTP_HOST'] ?? 'cli';
+
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+
+if (strpos($hostName, 'localhost') !== false || strpos($hostName, '127.0.0.1') !== false) {
+    define('BASE_URL', $protocol . $hostName . '/projet_php_blog/public');
+} else {
+    define('BASE_URL', 'https://projet-php-blog.onrender.com');
+}

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../includes/header.php'; ?>
 <style>
     body {
-        background-image: url("/images/background2.jpg");
+        background-image: url("<?= BASE_URL ?>/images/background2.jpg");
         text-shadow: none;
     }
 
