@@ -55,10 +55,9 @@ if (!defined('SKIP_DB')) {
     } catch (PDOException $e) {
         http_response_code(503);
 
-        // Empêche la redirection si on est déjà sur /503.php
-        $current = basename($_SERVER['SCRIPT_NAME'] ?? '');
-        if ($current !== '503.php') {
-            header("Location: " . BASE_URL . "/503.php");
+        $script = $_SERVER['SCRIPT_NAME'] ?? '';
+        if (!str_ends_with($script, '503.php')) {
+            header('Location: /503.php');
             exit;
         }
     }
