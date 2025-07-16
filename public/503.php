@@ -22,10 +22,10 @@ http_response_code(503);
     </header>
 
     <div class="margin_body_sauf_headerfooter">
-        <h2 style="color: #e74c3c; text-align: center; margin-top: 100px;">
-            ⚠️ Service temporairement indisponible
+        <h2 style="font-size: 3rem;">
+            Service temporairement indisponible
         </h2>
-        <p style="text-align: center; font-size: 1.2rem;">
+        <p style="font-size: 1.5rem;">
             Base de données inaccessible. Merci de revenir plus tard.
         </p>
     </div>
