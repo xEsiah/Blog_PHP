@@ -43,6 +43,10 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     http_response_code(503);
-    header("Location: " . BASE_URL . "/503.php");
-    exit;
+
+    $currentScript = $_SERVER['SCRIPT_NAME'] ?? '';
+    if (strpos($currentScript, '503.php') === false) {
+        header("Location: " . BASE_URL . "/503.php");
+        exit;
+    }
 }
