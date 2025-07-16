@@ -55,14 +55,11 @@ if (!defined('SKIP_DB')) {
     } catch (PDOException $e) {
         http_response_code(503);
 
-        // Empêcher la redirection en boucle vers 503
-        $currentScript = $_SERVER['SCRIPT_NAME'] ?? '';
-        if (strpos($currentScript, '503.php') === false) {
+        // Empêche la redirection si on est déjà sur /503.php
+        $current = basename($_SERVER['SCRIPT_NAME'] ?? '');
+        if ($current !== '503.php') {
             header("Location: " . BASE_URL . "/503.php");
             exit;
         }
-
-        // Facultatif : log erreur
-        error_log("[DB ERROR] " . $e->getMessage() . PHP_EOL, 3, $projectRoot . '/logs/db_error.log');
     }
 }

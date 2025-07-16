@@ -2,7 +2,11 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/../config/config.php';
+
+// Ne charge config.php que si SKIP_DB n'est pas défini
+if (!defined('SKIP_DB')) {
+    require_once __DIR__ . '/../config/config.php';
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
