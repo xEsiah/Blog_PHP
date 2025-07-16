@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/config.php';
+define('SKIP_DB', true);
+http_response_code(503);
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
