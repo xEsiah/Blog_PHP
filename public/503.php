@@ -1,33 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+define('SKIP_DB', true); // Bloque config.php depuis header
+http_response_code(503);
+require_once __DIR__ . '/../includes/header.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Esiah's Corner</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/images/icon.ico">
+<h2 style="color: #e74c3c; text-align: center; margin-top: 100px;">
+    ⚠️ Service invalide pour le moment
+</h2>
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css">
+<p style="text-align: center; font-size: 1.2rem;">
+    Nous rencontrons un problème de connexion à la base de données.<br>
+    Merci de revenir plus tard.
+</p>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-    <header>
-        <div>
-            <h1>Esiah's Corner</h1>
-            <p>Le forum de l'élitisme</p>
-        </div>
-    </header>
-    <div class="margin_body_sauf_headerfooter"></div>
-    <h2 style="color: #e74c3c; text-align: center; margin-top: 100px;">
-        ⚠️ Service invalide pour le moment
-    </h2>
-
-    <p>
-        Nous rencontrons un problème de connexion à la base de données.<br>
-        Merci de revenir plus tard.
-    </p>
-
-    <?php require_once __DIR__ . '/../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
