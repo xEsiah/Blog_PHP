@@ -32,8 +32,18 @@ try {
     $pdo = new PDO($dsn, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Connexion échouée : " . $e->getMessage());
+    // Code HTTP 503 = Service Indisponible
+    http_response_code(503);
+
+    // Détection du bon chemin public
+    $errorPage = $isLocal
+        ? $protocol . $hostName . '/projet_php_blog/public/503.php'
+        : BASE_URL . '/503.php';
+
+    header("Location: $errorPage");
+    exit;
 }
+
 
 $hostName = $_SERVER['HTTP_HOST'] ?? 'cli';
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
