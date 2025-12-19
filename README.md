@@ -27,7 +27,7 @@ Last deployement on my own website
 - User-friendly blog interface  
 - Article creation, editing, and deletion (CRUD)  
 - Basic routing system  
-- Data stored in a PostgreSQL database  
+- Data stored in a MySQL database (utilisation de PostgreSQL en local)  
 - Responsive design
 
 ## 🎯 Purpose
