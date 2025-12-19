@@ -7,14 +7,20 @@
 
 ## 🌐 Live Demo
 
+First deployement on Render
 👉 [https://blog-php-xesiah.onrender.com](https://blog-php-xesiah.onrender.com).
+
+Last deployement on my own website
+👉 [https://esiah.dev/blog/](https://esiah.dev/blog/).
 
 ## 🧰 Tech Stack
 
 - PHP  
 - HTML / CSS  
-- MySQL  
+- MySQL
+- phpMyAdmin
 - Render (Deployment)
+- Hostinger (Deployment)
 
 ## 📁 Features
 
